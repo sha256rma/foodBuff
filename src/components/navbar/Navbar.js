@@ -11,31 +11,23 @@ export const Navbar = ({login, logout, loggedIn}) => {
             </Title>
 
             <Authentication>
-                {
-                loggedIn !== "loading" ? (
-
-                    <>
-                    {
-                    loggedIn ? ( 
+                {loggedIn !== "loading" ? (
+                <>
+                    {loggedIn ? ( 
                         `Welcome back ${(loggedIn.displayName)}` 
-                        ) : (
-                         "" 
-                        )
-                    }
-                            
-                    {
-                    loggedIn ? ( 
-                        <LoginButton onClick={logout}> | Log out</LoginButton>
-                        ) : (
-                        <LoginButton onClick={login}>Log in | Sign up</LoginButton>
-                        )
-                    }
-                    </>
-
                     ) : (
+                        "" 
+                    )}
+                            
+                    {loggedIn ? ( 
+                        <LoginButton onClick={logout}> | Log out</LoginButton>
+                    ) : (
+                        <LoginButton onClick={login}>Log in | Sign up</LoginButton>
+                    )}
+                </>
+                ) : (
                     "loading..."
-                    )   
-                }
+                )}
             </Authentication>
 
         </NavbarStyle>
