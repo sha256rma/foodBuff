@@ -1,5 +1,4 @@
 export const RestaurantJSON = [
-    
     {
         img: "https://images.pexels.com/photos/1885578/pexels-photo-1885578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 6.5,
@@ -12,9 +11,6 @@ export const RestaurantJSON = [
         name: "Hamburger",
         section: "Sandwich"
     },
-
-
-
     {
         name: "Pepperoni Pizza",
         img: "https://images.pexels.com/photos/774487/pexels-photo-774487.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
@@ -33,18 +29,12 @@ export const RestaurantJSON = [
         name: "Veggie Pizza",
         section: "Pizza"
     },
-
-
-
     {
         img: "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 3,
         name: "Fries",
         section: "Sides"
     },
-
-
-
     {
         img: "https://images.pexels.com/photos/3008/drinks-supermarket-cans-beverage.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 1,
@@ -52,5 +42,4 @@ export const RestaurantJSON = [
         section: "Drinks",
         choices: ["Coke", "Sprite", "Root Beer"]
     }
-    
 ];

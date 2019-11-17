@@ -14,7 +14,7 @@ const RestaurantFood = RestaurantJSON.reduce((category, food) => {
 
 }, {});
 
-export const Menu = ({setOpenFood}) => {
+export const Menu = ({setFoodDialog}) => {
 
     return (
         <MenuStyle>
@@ -28,7 +28,7 @@ export const Menu = ({setOpenFood}) => {
                                 key={index} 
                                 img={food.img} 
                                 onClick={()=> {
-                                    setOpenFood(food)
+                                    setFoodDialog(food)
                                 }}
                             >
                                 <FoodLabel>
