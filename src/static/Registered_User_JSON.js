@@ -1,9 +1,9 @@
-export const RestaurantJSON = [
+export const Registered_User_JSON = [
     {
         img: "https://images.pexels.com/photos/1885578/pexels-photo-1885578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 6.5,
         name: "Cheese Sandwich",
-        section: "Sandwich"
+        section: "Registered_User_JSON"
     },
     {
         img: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",

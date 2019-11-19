@@ -1,6 +1,6 @@
 import React from 'react';
 import { intToUSD } from '../common/intToUSD';
-import { Quantity } from './Quantity';
+import { SetQuantity } from './SetQuantity';
 import { Choices } from "./Choices";
 import { Dialog, DialogShadow, DialogBanner, DialogBannerName, DialogContent, DialogFooter, ConfirmButton } from './FoodDialog-Style';
 
@@ -10,18 +10,18 @@ import { useChoice } from "../../hooks/useChoices";
 
 export const getPrice = (order) => order.quantity * order.price;
 
-export const FoodDialogContainer  = ({ openFood, setOpenFood, setOrders, orders }) => {
+export const FoodDialogContainer  = ({ openPopup, setPopup, setOrders, orders }) => {
 
-    const quantity = useQuantity(openFood && openFood.quantity);
-    const choiceRadio = useChoice(openFood.choice);
-    const isEditing = openFood.index > -1;
+    const quantity = useQuantity(openPopup && openPopup.quantity);
+    const choiceRadio = useChoice(openPopup.choice);
+    const isEditing = openPopup.index > -1;
 
-    const close = () => setOpenFood();
+    const close = () => setPopup();
 
-    if (!openFood) return null;
+    if (!openPopup) return null;
 
     const order = {
-        ...openFood,
+        ...openPopup,
         quantity: quantity.value,
         choice: choiceRadio.value
     }
@@ -29,7 +29,7 @@ export const FoodDialogContainer  = ({ openFood, setOpenFood, setOrders, orders 
 
   const editOrder = () => {
     const newOrders = [...orders];
-    newOrders[openFood.index] = order;
+    newOrders[openPopup.index] = order;
     setOrders(newOrders);
     close();
   }
@@ -41,22 +41,22 @@ export const FoodDialogContainer  = ({ openFood, setOpenFood, setOrders, orders 
 
    
 
-    return (openFood ? (
+    return (openPopup ? (
         <React.Fragment>
             <Dialog>
-                <DialogBanner img={openFood.img}>
-                    <DialogBannerName> {openFood.name} </DialogBannerName>
+                <DialogBanner img={openPopup.img}>
+                    <DialogBannerName> {openPopup.name} </DialogBannerName>
                 </DialogBanner>
                 <DialogContent>
-                    <Quantity quantity={quantity}/>
-                    {openFood.choices && (
-                        <Choices openFood={openFood} choiceRadio={choiceRadio} />
+                    <SetQuantity quantity={quantity}/>
+                    {openPopup.choices && (
+                        <Choices openPopup={openPopup} choiceRadio={choiceRadio} />
                     )}
                 </DialogContent>
                 <DialogFooter>
                     <ConfirmButton
                         onClick={isEditing ? editOrder : addToOrder}
-                        disabled={openFood.choices && !choiceRadio.value}
+                        disabled={openPopup.choices && !choiceRadio.value}
                     >
                         {isEditing ? `Update order: ` : `Add to order: `}
                         {intToUSD(getPrice(order))}
@@ -71,6 +71,6 @@ export const FoodDialogContainer  = ({ openFood, setOpenFood, setOrders, orders 
 }
 
 export const FoodDialog = (props) =>  {
-    if (!props.openFood) return null;
+    if (!props.openPopup) return null;
     return <FoodDialogContainer {...props} /> 
 }

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const MenuStyle = styled.div`
-  width: 80%;
-  padding: 5px;
+  width: 77%;
+  padding: 10px;
   margin-top: 50px;
 `;
 

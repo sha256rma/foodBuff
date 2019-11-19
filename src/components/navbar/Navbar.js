@@ -2,7 +2,7 @@ import React from 'react';
 import { NavbarStyle, Title, Authentication, LoginButton } from './Navbar-Style';
 
 export const Navbar = ({login, logout, loggedIn}) => {
-    
+
     return (
         <NavbarStyle>
 

@@ -11,11 +11,11 @@ const Label = styled.label`
   ${CursorPointer}
 `;
 
-export function Choices({ openFood, choiceRadio }) {
+export function Choices({ openPopup, choiceRadio }) {
   return (
     <>
       <h3>Choose one</h3>
-      {openFood.choices.map(choice => (
+      {openPopup.choices.map(choice => (
         <React.Fragment>
           <RadioInput
             type="radio"

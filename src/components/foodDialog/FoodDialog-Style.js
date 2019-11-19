@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import { FoodLabel } from '../menu/Menu-Style';
 
 export const Dialog = styled.div` 
-    width: 500px;
-    background-color: white;
-    position: fixed;
-    top: 75px;
-    z-index: 12;
-    max-height: calc(100% - 100px);
-    left: calc(50% - 250px);
-    display: flex;
-    flex-direction: column;
+  width: 500px;
+  background-color: white;
+  position: fixed;
+  top: 75px;
+  z-index: 12;
+  max-height: calc(100% - 100px);
+  left: calc(50% - 250px);
+  display: flex;
+  flex-direction: column;
 `
 
 export const DialogShadow = styled.div`
@@ -47,10 +47,10 @@ export const DialogContent = styled.div`
 `;
 
 export const DialogFooter = styled.div`
-  box-shadow: 0px -2px 10px 0px grey;
   height: 60px;
   display: flex;
   justify-content: center;
+  background-color: blue;
 `;
 
 export const ConfirmButton = styled.div`
