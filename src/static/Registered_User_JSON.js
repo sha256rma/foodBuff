@@ -3,37 +3,43 @@ export const Registered_User_JSON = [
         img: "https://images.pexels.com/photos/1885578/pexels-photo-1885578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 6.5,
         name: "Cheese Sandwich",
-        section: "Registered_User_JSON"
+        section: "Registered_User_JSON",
+        choices: ["Plain", "Mild", "Hot"]
     },
     {
         img: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 5,
         name: "Hamburger",
-        section: "Sandwich"
+        section: "Sandwich",
+        choices: ["Plain", "Mild", "Hot"]
     },
     {
         name: "Pepperoni Pizza",
         img: "https://images.pexels.com/photos/774487/pexels-photo-774487.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
         section: "Pizza",
-        price: 12
+        price: 12,
+        choices: ["Plain", "Mild", "Hot"]
     },
     {
         img: "https://images.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 10,
         name: "Chicken Pizza",
-        section: "Pizza"
+        section: "Pizza",
+        choices: ["Plain", "Mild", "Hot"]
     },
     {
         img: "https://images.pexels.com/photos/2232/vegetables-italian-pizza-restaurant.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 15,
         name: "Veggie Pizza",
-        section: "Pizza"
+        section: "Pizza",
+        choices: ["Plain", "Mild", "Hot"]
     },
     {
         img: "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 3,
         name: "Fries",
-        section: "Sides"
+        section: "Sides",
+        choices: ["Plain", "Mild", "Hot"]
     },
     {
         img: "https://images.pexels.com/photos/3008/drinks-supermarket-cans-beverage.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",

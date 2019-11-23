@@ -47,8 +47,13 @@ const DetailItem = styled.div`
 `;
 
 
-const sendOrder = (orders, { email, displayName }) => {
-  const  newOrderRef = database.ref("orders").push();
+const sendOrder = (total, orders, { email, displayName }) => {
+  
+  var timestamp = Number(new Date());
+  var date = new Date(timestamp) ;
+
+  const newOrderRef = database.ref("orders").push();
+
   const newOrders = orders.map(order => {
     return Object.keys(order).reduce((acc, orderKey) => {
       if (!order[orderKey]) {
@@ -72,7 +77,9 @@ const sendOrder = (orders, { email, displayName }) => {
   newOrderRef.set({
     order: newOrders,
     email,
-    displayName
+    displayName,
+    date,
+    total
   });
 }
 
@@ -144,14 +151,18 @@ export const Order = ({orders, setOrders, setPopup, login, loggedIn, setOpenOrde
       
       }
       {orders.length > 0 && <DialogFooter>
-         <ConfirmButton onClick={() => {
-          if (loggedIn) {
-            setOpenOrderDialog(true);
-            sendOrder(orders, loggedIn);
-          } else {
-            login();
-          }
-        }}>Checkout</ConfirmButton>
+        <ConfirmButton 
+          onClick={() => {
+            if (loggedIn) {
+              setOpenOrderDialog(true);
+              sendOrder(total, orders, loggedIn);
+            } else {
+              login();
+            }
+          }}
+        >
+          Checkout
+        </ConfirmButton>
       </DialogFooter> }
     </OrderStyled>
   )
