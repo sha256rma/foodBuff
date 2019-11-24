@@ -2,7 +2,8 @@ import React from 'react';
 import { database } from './firebase';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-
+import chroma from 'chroma-js';
+import Select from 'react-select';
 import Floater from "react-floater";
 import styled from "styled-components";
 
@@ -25,6 +26,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 90vw;
   height: 60vh;
+  overflow: scroll;
 `;
 
 const Title = styled.h2`
@@ -51,20 +53,19 @@ const Label1 = styled.label`
   margin-bottom: 5px;
 `;
 
-
-const Input = styled.input.attrs({
-  required: true
-})`
-  border-radius: 3px;
-  border: 2px solid palevioletred;
-  color: palevioletred;
-  display: block;
-  font-size: 20px;
-  line-height: 1;
-  max-width: 500px;
-  padding: 10px;
-  width: 100%;
-`;
+// const Input = styled.input.attrs({
+//   required: true
+// })`
+//   border-radius: 3px;
+//   border: 2px solid palevioletred;
+//   color: palevioletred;
+//   display: block;
+//   font-size: 20px;
+//   line-height: 1;
+//   max-width: 500px;
+//   padding: 10px;
+//   width: 100%;
+// `;
 
 class Admin extends React.Component {
 
@@ -80,7 +81,8 @@ class Admin extends React.Component {
             customerOrderId: "",
             customerOrderTotal: 0,
             customerOrderDate: "",
-            selected: null
+            selected: null,
+            cook: []
         };
 
         this.getUserData();
@@ -130,6 +132,17 @@ class Admin extends React.Component {
         });
     }
 
+    handleChange = cook => {
+
+        {cook.map((item) => {
+            this.setState({
+                cook: [...this.state.cook, item.value]
+            });
+        })}
+    };
+
+    updateOrder = () => database.ref(`orders/${this.state.customerOrderId}`).update({cook: this.state.cook})
+
     render() {
 
         let data = this.state.data;
@@ -137,26 +150,91 @@ class Admin extends React.Component {
 
         const columns = [
             {
-                Header: 'Date',
+                Header: 'Order Date',
                 accessor: 'orderDate'
             },
             {
-                Header: 'Email',
-                accessor: 'email'
+                Header: 'Customer Email',
+                accessor: 'customerEmail'
             },
             {
                 Header: 'Customer Name',
-                accessor: 'displayName'
+                accessor: 'customerName'
             },
             {
                 Header: 'Order Total',
-                accessor: 'total'
+                accessor: 'orderTotal'
             },
             {
-                Header: 'Status',
-                accessor: 'status'
+                Header: 'Order Status',
+                accessor: 'orderStatus'
+            },
+            {
+                Header: 'Delivery',
+                accessor: 'deliveryStatus'
+            },
+            {
+                Header: 'Cook(s)',
+                accessor: 'cook'
             }
         ]
+        const colourOptions = [
+            { value: 'Cook 1, ', label: 'Cook 1', color: '#00B8D9', isFixed: true },
+            { value: 'Cook 2, ', label: 'Cook 2', color: '#0052CC' },
+            { value: 'Cook 3, ', label: 'Cook 3', color: '#5243AA' },
+            { value: 'Cook 4, ', label: 'Cook 4', color: '#FF5630', isFixed: true },
+            { value: 'Cook 5, ', label: 'Cook 5', color: '#FF8B00' },
+        ];
+
+        const colourStyles = {
+            control: styles => ({ ...styles, backgroundColor: 'white' }),
+            option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+                const color = chroma(data.color);
+                return {
+                ...styles,
+                backgroundColor: isDisabled
+                    ? null
+                    : isSelected
+                    ? data.color
+                    : isFocused
+                    ? color.alpha(0.1).css()
+                    : null,
+                color: isDisabled
+                    ? '#ccc'
+                    : isSelected
+                    ? chroma.contrast(color, 'white') > 2
+                    ? 'white'
+                    : 'black'
+                    : data.color,
+                cursor: isDisabled ? 'not-allowed' : 'default',
+
+                ':active': {
+                    ...styles[':active'],
+                    backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
+                },
+                };
+            },
+            multiValue: (styles, { data }) => {
+                const color = chroma(data.color);
+                return {
+                ...styles,
+                backgroundColor: color.alpha(0.1).css(),
+                };
+            },
+            multiValueLabel: (styles, { data }) => ({
+                ...styles,
+                color: data.color,
+            }),
+            multiValueRemove: (styles, { data }) => ({
+                ...styles,
+                color: data.color,
+                ':hover': {
+                backgroundColor: data.color,
+                color: 'white',
+                },
+            }),
+        };
+
 
         const Content = ({ closeFn }) => (
             <Wrapper>
@@ -179,10 +257,17 @@ class Admin extends React.Component {
                     </Group>
                     <Group>
                         <Label>Customer Order</Label>
+                        <Select
+                            closeMenuOnSelect={false}
+                            isMulti
+                            options={colourOptions}
+                            styles={colourStyles}
+                            onChange={this.handleChange}
+                        />
                         {this.state.customerOrder.map((item) => {     
                             return (
                                 <div style={{display: 'flex', marginTop: '10px'}}>
-                                    <img src={item.img} width="100" height="50" />
+                                    <img alt="Loading" src={item.img} width="100" height="50" />
                                     <Label1> {item.name} </Label1>
                                     <Label1> ({item.section}) </Label1>
                                     <Label1> ${item.price} </Label1>
@@ -196,12 +281,13 @@ class Admin extends React.Component {
                         <Label1>{this.state.customerName}</Label1>
                     </Group>
 
-                    <button type="submit">SEND</button>
+                    <button onClick={this.updateOrder}>SEND</button>
                 </form>
             </Wrapper>
         );
-
+        const { cook } = this.state;
         return (
+            
             <div>
 
                 <ReactTable
@@ -216,14 +302,14 @@ class Admin extends React.Component {
                                     
                                     this.setState({
                                         selected: rowInfo.index,
-                                        customerName: rowInfo.original.displayName,
-                                        customerEmail: rowInfo.original.email,
-                                        customerOrder: rowInfo.original.order,
+                                        customerName: rowInfo.original.customerName,
+                                        customerEmail: rowInfo.original.customerEmail,
+                                        customerOrder: rowInfo.original.customerOrder,
                                         customerOrderId: Id[rowInfo.index],
-                                        customerOrderTotal: rowInfo.original.total,
-                                        customerOrderDate: rowInfo.original.orderDate
+                                        customerOrderTotal: rowInfo.original.orderTotal,
+                                        customerOrderDate: rowInfo.original.orderDate,
+                                        cook: ""
                                     }) 
-                                    console.log(this.state.customerOrder);
                                 },
                                 style: {
                                     background: rowInfo.index === this.state.selected ? '#00afec' : 'white',
@@ -237,9 +323,9 @@ class Admin extends React.Component {
                 />
 
                 <Button>
-                                <Floater component={Content}>
-                    <Button primary>MODAL</Button>
-                </Floater>
+                    <Floater component={Content}>
+                        <Button primary>MODAL</Button>
+                    </Floater>
                  </Button>
 
 

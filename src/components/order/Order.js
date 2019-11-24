@@ -10,7 +10,6 @@ import { getPrice } from '../foodDialog/FoodDialog';
 import { allResolved } from 'q';
 import { database } from '../../firebase'
 
-
 const OrderStyled = styled.div`
   position: fixed;
   right: 0px;
@@ -46,11 +45,15 @@ const DetailItem = styled.div`
   font-size: 10px;
 `;
 
-
 const sendOrder = (total, orders, { email, displayName }) => {
   
-  var timestamp = Number(new Date());
-  var date = new Date(timestamp) ;
+  var orderDate = Date.now();
+  var orderStatus = "Pending";
+  var deliveryStatus = "Bidding in Progress";
+  var cook = "Not Assigned";
+  var customerName = displayName;
+  var customerEmail = email;
+  var orderTotal = total;
 
   const newOrderRef = database.ref("orders").push();
 
@@ -60,14 +63,6 @@ const sendOrder = (total, orders, { email, displayName }) => {
         // undefined value
         return acc;
       }
-      if (orderKey === "toppings") {
-        return {
-          ...acc,
-          [orderKey]: order[orderKey]
-          .filter(({ checked }) => checked)
-          .map(({ name }) => name)
-        };
-      }
       return {
         ...acc,
         [orderKey]: order[orderKey]
@@ -75,11 +70,14 @@ const sendOrder = (total, orders, { email, displayName }) => {
     }, {});
   });
   newOrderRef.set({
-    order: newOrders,
-    email,
-    displayName,
-    date,
-    total
+    customerOrder: newOrders,
+    customerEmail,
+    customerName,
+    orderDate,
+    orderTotal,
+    orderStatus,
+    deliveryStatus,
+    cook
   });
 }
 
@@ -167,5 +165,3 @@ export const Order = ({orders, setOrders, setPopup, login, loggedIn, setOpenOrde
     </OrderStyled>
   )
 }
-
-
