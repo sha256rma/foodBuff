@@ -49,7 +49,7 @@ const sendOrder = (total, orders, { email, displayName }) => {
   
   var orderDate = Date.now();
   var orderStatus = "Pending";
-  var deliveryStatus = "Bidding in Progress";
+  var deliveryStatus = "Bidding Not Started";
   var cook = "Not Assigned";
   var customerName = displayName;
   var customerEmail = email;

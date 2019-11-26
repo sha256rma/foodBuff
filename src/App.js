@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Main from './Main';
 import Admin from './Admin';
 import Error from './Error';
-import MapContainer from '../src/components/order/MapContainer'
+import MapContainer from '../src/components/delivery/MapContainer'
  
 class App extends Component {
   render() {
