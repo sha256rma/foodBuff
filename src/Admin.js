@@ -18,7 +18,7 @@ const Button = styled.button.attrs({
   border: 2px solid palevioletred;
   border-radius: 3px;
 `;
-
+//Intial Commit 
 const Wrapper = styled.div`
   padding: 2rem;
   background: linear-gradient(to bottom, #ccc 30%, #fff);
