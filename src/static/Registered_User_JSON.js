@@ -3,7 +3,7 @@ export const Registered_User_JSON = [
         img: "https://images.pexels.com/photos/1885578/pexels-photo-1885578.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         price: 6.5,
         name: "Cheese Sandwich",
-        section: "Registered_User_JSON",
+        section: "Registered User",
         choices: ["Plain", "Mild", "Hot"]
     },
     {

@@ -5,6 +5,7 @@ import Main from './Main';
 import Admin from './Admin';
 import Error from './Error';
 import MapContainer from '../src/components/delivery/MapContainer'
+import Homepage from '../src/components/homepage/Homepage'
  
 class App extends Component {
   render() {
@@ -12,10 +13,11 @@ class App extends Component {
        <BrowserRouter>
         <div>
             <Switch>
-             <Route path="/" component={Main} exact/>
-             <Route path="/admin" component={Admin}/>
-             <Route path="/delivery" component={MapContainer}/>
-            <Route component={Error}/>
+              <Route path="/" component={Main} exact/>
+              <Route path="/admin" component={Admin}/>
+              <Route path="/delivery" component={MapContainer}/>
+              <Route path="/homepage" component={Homepage}/>
+              <Route component={Error}/>
            </Switch>
         </div> 
       </BrowserRouter>
