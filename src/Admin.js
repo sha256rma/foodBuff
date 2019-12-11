@@ -83,7 +83,8 @@ class Admin extends React.Component {
             customerOrderDate: "",
             selected: null,
             cook: [],
-            deliveryStatus: ""
+            deliveryStatus: "",
+            customerAddress: ""
         };
 
         this.getUserData();
@@ -120,12 +121,6 @@ class Admin extends React.Component {
                 const dataArray = Object.values(data);
                 
                 const orderId = Object.keys(data);
-
-                // dataArray.forEach((item) => {     
-                //     if(item.orderDate) {
-                //         item.orderDate = that.timeConverter(item.orderDate);
-                //     }
-                // })
                 
                 that.setState({ 
                     data: dataArray,
@@ -156,6 +151,7 @@ class Admin extends React.Component {
         var lowestBid = "No bids yet"
         var orderTotal = this.state.customerOrderTotal
         var deliveryPerson = "No delivery person assigned"
+        var address = this.state.customerAddress
 
 
         const delivery = database.ref(`delivery/${this.state.customerOrderId}`);
@@ -165,7 +161,8 @@ class Admin extends React.Component {
             contactName,
             lowestBid,
             orderTotal,
-            deliveryPerson
+            deliveryPerson,
+            address
         });
 
         window.location.reload();
@@ -337,7 +334,8 @@ class Admin extends React.Component {
                                         customerOrderTotal: rowInfo.original.orderTotal,
                                         customerOrderDate: rowInfo.original.orderDate,
                                         cook: "",
-                                        deliveryStatus: rowInfo.original.deliveryStatus
+                                        deliveryStatus: rowInfo.original.deliveryStatus,
+                                        customerAddress: rowInfo.original.customerAddress
                                     }) 
                                 },
                                 style: {
@@ -353,7 +351,7 @@ class Admin extends React.Component {
 
                 <Button>
                     <Floater component={Content}>
-                        <Button primary>MODAL</Button>
+                        <Button primary>Details</Button>
                     </Floater>
                  </Button>
 

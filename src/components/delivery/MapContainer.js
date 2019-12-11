@@ -28,8 +28,6 @@ export class MapContainer extends Component {
 
   render() {
     return (
-      <div>
-      {/* <DeliveryTable /> */}
       <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
         <Marker onClick={this.onMarkerClick} name={'Current location'} />
         <InfoWindow
@@ -42,7 +40,6 @@ export class MapContainer extends Component {
           </div>
         </InfoWindow>
       </CurrentLocation>
-      </div>
     );
   }
 }

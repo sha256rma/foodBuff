@@ -6,6 +6,9 @@ import Admin from './Admin';
 import Error from './Error';
 import MapContainer from '../src/components/delivery/MapContainer'
 import Homepage from '../src/components/homepage/Homepage'
+import Salespeople from './Salespeople';
+import Cook from './Cook';
+import Salary from './Salary';
  
 class App extends Component {
   render() {
@@ -17,6 +20,9 @@ class App extends Component {
               <Route path="/admin" component={Admin}/>
               <Route path="/delivery" component={MapContainer}/>
               <Route path="/homepage" component={Homepage}/>
+              <Route path="/salespeople" component={Salespeople}/>
+              <Route path="/cook" component={Cook}/>
+              <Route path="/salary" component={Salary}/>
               <Route component={Error}/>
            </Switch>
         </div> 
